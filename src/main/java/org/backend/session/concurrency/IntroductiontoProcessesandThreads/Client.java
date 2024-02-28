@@ -1,4 +1,4 @@
-package org.backend.session.concurrency;
+package org.backend.session.concurrency.IntroductiontoProcessesandThreads;
 
 public class Client {
 
