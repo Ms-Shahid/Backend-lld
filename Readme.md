@@ -38,3 +38,14 @@
   - Create a class TreeSizeCalculator to calculate the size of a BinaryTree using multiple threads.
   - TreeSizeCalculator constructor will be passed the root of the tree and ExecutorService to make new threads.
   - TreeSizeCalculator should implement Callable<Integer> interface
+
+<hr>
+
+## Concurrency - 3 : Synchronization
+
+* Problem-1
+  - Class should be public and name is Counter
+  - It should’ve a single private data member of int type named count
+  - It should’ve a single public constructor which takes an integer parameter and sets the value of count
+
+
