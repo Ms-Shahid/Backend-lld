@@ -80,3 +80,64 @@
 - Similar to Runnable interface, however, the only difference is has a return type
 - It can return any data-type
 - Used when we have to implement task & return some data
+
+## Problem of synchronization
+
+- When more than one thread works on a shared variables at the same time, it can lead to potentially wrong results.
+- Ref => 
+- To handle this there is a concept of **critical section(CS)** which is applicable whenever there is a shared data among different threads
+- Race Condition(RC) : When multiple threads are trying to access the shared resources (within CS) at the same time.
+- Preemption : A program which is in its critical-Section is preempted(halt | stop | abort) by CPU can lead to syn problem.
+
+- In Summary 
+- Critical-Section is a section where multiple threads are executing
+- Race Condition is a condition where multiple threads trying to enter CS
+- Preemption is a program within CS is preempted due to some other high priority task.
+
+## Properties of Synchronization problem
+
+- Ideally there must be only one thread present in CS at a time
+1) Mutual Exclusion 
+   - only one thread should be present inside the CS at any point of time
+2) Progress
+    - Overall, the system should keep making progress, all the threads should get a chance to entire into CS 
+3) Bounded Waiting
+    - No thread should have to wait infinitely, avg waiting time should be same or similar
+4) No Busy waiting
+    - Instead of continuously checking the critical section again & again whether it's free, its better to notify thread once the critical section is free
+    - Ideally there should not be busy waiting in code, it will lead to wastage of resources.
+
+## Solution of Synchronization problem
+1) Lock Class
+   - The solution to sync problem is _**MUTEX**_, which is _Mutually Exclusion_
+   - We have a Lock class in Java to use MUTEX
+   - Along with shared data, there is also Lock object, 
+   - At a given point of time only one thread can acquire the lock, & once the lock is acquired other thread can't enter CS , Unless release of lock is done.
+   - Ref => 
+
+2) Synchronized keyword
+   - In jave every object has implict lock
+   - Instead of creating a lock & releasing a lock manually we can simply use **synchronized** keyword
+   - Its similar to lock provided by Java internally
+   - You have to specify on which object you have to acquire lock, the rest part is handled by _Synchronized keyword_
+   - `lock.lock();
+     count.value += i;
+     lock.unlock();`
+   - Instead of the above we can simply use 
+   - `synchronized(object) { //operations }`
+   - Note : Synchronized can be used when we want to acquire lock only on one object passed as parameter
+   - In case of multiple _Lock_ would be preferred way
+
+3) Synchronized Method
+    - once we make a method synchronized, only one thread can call this synchronized object at any given point of time.
+    - similar to synchronized keyword, now its applicable at method level
+    - can be used when we want to access/update count in multithreading env
+   
+## Thread class Methods
+
+- **.join()** : join() waits for thread to die before proceeding for next execution
+ - An invocation of this method behaves in exactly the same way as the invocation
+   - join(0)
+   - Throws:
+   - InterruptedException – if any thread has interrupted the current thread. The interrupted status of the current thread is cleared when this exception is thrown.
+   - Ref => https://www.geeksforgeeks.org/joining-threads-in-java/
