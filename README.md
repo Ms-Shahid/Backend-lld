@@ -141,3 +141,37 @@
    - Throws:
    - InterruptedException – if any thread has interrupted the current thread. The interrupted status of the current thread is cleared when this exception is thrown.
    - Ref => https://www.geeksforgeeks.org/joining-threads-in-java/
+
+
+
+## Producer-Consumer Problem
+
+> Problem statement
+> - Lets say we have a store of products say shirts, where initially we have 6 empty slots
+> - We have infinite no. of producers & consumers
+> - Condition is, if there are empty slots then producers can produce the shirt & if there are filled slot then consumer can consume the shirt
+> - At any point of time the production or consumption shouldn't cross maxsize i.e 6
+> - Design an mechanism to solve these problem in efficient & multithreaded way, assuming that at a time more shirts can be produced or consumed in multi-threaded env
+
+### Approaching the problem statement
+
+> - As per the PS, there are multiple producers & multiple consumers running parallely & there can be modification of data(store) at the same time.
+> - say if current size = 5, running in multi in parallel, `if (store.size() < maxSize ){ add() } ` &  `if (store.size() < maxSize ){ add() }`
+> - If multiple therads are reading the value of maxSize at a same time, both the above condition surpasses it & adding shirts to store exceeding maxSize is irrelevant
+> - One solution is to use locking mechanism asuming store is a critical section
+> - We can use _ExecutorService_ & run them in parallel, but here we ll not get desired output as producers crossing beyond maxSize ( multiple threads ) & consumers reaches below 0
+> - Note : While using _ExecutorService_ we will not get _NoSuchElementException_ as _ExecutorService_ is reusing the same threads.
+> - Ref => 
+> - Using Semaphore = Mutex + multiple threads in the critical Section
+> - With Semaphore, multiple threads are allowed inside the CS & we have the control over it
+> - In Producer class, the producerSemaphore will .acquire() (p--) & consumerSemaphore will .release() (c++)
+> - In Consumer class, the consumerSemaphore will .acquire() (c--) & producerSemaphore will .release() (p++
+> - Therefore using Semaphore, we can achieve multithreading & parallel & increase performance.
+> - Ref => 
+
+## Atomic Data types
+
+- ADT are the data types which are by default synchronized (volatile) 
+- When ever we want to use data types in multi threaded env, the use ATD.
+- ATD are thread safe.
+- In case of String thread safe, we can use StringBuffer.
