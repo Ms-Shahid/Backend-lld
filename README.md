@@ -175,3 +175,30 @@
 - When ever we want to use data types in multi threaded env, the use ATD.
 - ATD are thread safe.
 - In case of String thread safe, we can use StringBuffer.
+
+
+## Collections Hierarchy
+
+ - Iterable (I)
+   - Collection (I) : Same type of element, hence map is not part of collection
+     - List (I)
+       - ArrayList(C)
+       - Vector(C)
+       - LinkedList(C)
+     - Queue (I)
+       - PriorityQueue(C)
+       - Deque(I)
+         - ArrayDeque(C)
+     - Set (I)
+       - HashSet(C)
+       - LinkedHashSet(C)
+       - SortedSet(I)
+         - TreeSet(C)
+
+## Interfaces 
+
+| Comparable                                   |  | Comparator                                                        |
+|-------------------------------------------|----------|-------------------------------------------------------------------|
+| Comparable interface compares “this” reference with the object specified |    | Comparator in Java compares two different class objects provided. |
+| using comparable we can use only one comparison |    | we can write more than one custom comparators as you want for a given type                                                                  |
+| if sorting of objects needs to be based on natural order then use Comparable |    | if you sorting needs to be done on attributes of different objects, then use Comparator                                                                   |
