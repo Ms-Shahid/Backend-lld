@@ -1,5 +1,6 @@
 package concurrency3.problem1;
 
+//get count & inc count
 public class Counter {
     private int count;
 
@@ -12,7 +13,7 @@ public class Counter {
     }
 
     public synchronized int getCount() {
-        return count;
+        return count; 
     }
 
     public synchronized void decValue(int offset){
